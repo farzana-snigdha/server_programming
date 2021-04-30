@@ -10,7 +10,7 @@ console.log(fileName);
 const fs = require("fs");
 console.log(fs);
 
-//module - info about current module.
+//module - info about current file/module.
 console.log(module);
 
 //process - info about where the program is being executed.
