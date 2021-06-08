@@ -6,9 +6,12 @@ const app = express();
 app.use("/users/",userRoutes)
 
 app.get("/", (req, res) => {
-  res.send("<h1>hi</h1>");
+  res.sendFile("home.html",{root:"./views"});
 });
-
+app.post("/", (req, res) => {
+    res.send("<h1>hi</h1>");
+  });
+  
 app.get("/about", (req, res) => {
   res.cookie("username", "asd");
   // res.clearCookie("username")
