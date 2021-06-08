@@ -1,11 +1,14 @@
 const express = require("express");
 const userRoutes=require("./routes/userRoutes.routes");
 const app = express();
+const {logger,printSomething} = require("./middlewares/app.middleware")
 
+//to call a middleware always from any rotes
+app.use([logger,printSomething])
 
 app.use("/users/",userRoutes)
 
-app.get("/", (req, res) => {
+app.get("/",logger, (req, res) => {
   res.sendFile("home.html",{root:"./views"});
 });
 app.post("/", (req, res) => {
@@ -27,5 +30,6 @@ app.get("/contact", (req, res) => {
 app.use((req, res) => {
   res.status(401).send("<h1>page not found</h1>");
 });
+
 
 module.exports = app;
