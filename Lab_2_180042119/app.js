@@ -6,6 +6,9 @@ const {logger,printSomething} = require("./middlewares/app.middleware")
 //to call a middleware always from any rotes
 app.use([logger,printSomething])
 
+//built in middleware
+app.use(express.static("public"))
+
 app.use("/users/",userRoutes)
 
 app.get("/",logger, (req, res) => {
