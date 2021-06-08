@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
+const isLoggedIn=require('./../middlewares/auth.middleware')
 
 //to read data from body, always do the same thing
 router.use(bodyParser.urlencoded({extended:false}))
@@ -15,22 +16,24 @@ router.get("/login", (req, res) => {
   // res.sendFile("login.html", { root: "./views/users" });
 });
 
-router.get("/dashboard/:id/:name", (req, res) => {
-  const { id, name } = req.params;
-  res.send("id: " + id + " username: " + name + " says hi");
+router.get("/dashboard", (req, res) => {
+  // const { id, name } = req.params;
+  res.send("user Dashboard");
 });
 
 router.get("/register", (req, res) => {
   res.sendFile("register.html", { root: "./views/users" });
 });
 
-router.post("/register", (req, res) => {
-   const name=req.body.uname;
-   const email=req.body.mail
-   const password=req.body.psw  //psw came from html : name
+router.post("/register",isLoggedIn, (req, res) => {
+  //  const name=req.body.uname;
+  //  const email=req.body.mail
+  //  const password=req.body.psw  //psw came from html : name
 
-   res.send("email: " + email + ", username: " + name +", password: " + password + " says hi")
-    // res.sendFile("register.html", { root: "./views/users" });
+  //  res.send("email: " + email + ", username: " + name +", password: " + password + " says hi")
+  //   // res.sendFile("register.html", { root: "./views/users" });
+
+  res.redirect('/users/dashboard')
   });
 
 
