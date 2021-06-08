@@ -1,6 +1,9 @@
 const express = require("express");
+const userRoutes=require("./routes/userRoutes.routes");
 const app = express();
 
+
+app.use(userRoutes)
 app.get("/", (req, res) => {
   res.status(201).send("<h1>hi</h1>");
 });
@@ -13,6 +16,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
+    res.json({name:"asd",hobby:"sleep"})
   res.status(201).send("<h1>contact</h1>");
 });
 
