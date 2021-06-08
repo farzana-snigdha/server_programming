@@ -3,9 +3,10 @@ const userRoutes=require("./routes/userRoutes.routes");
 const app = express();
 
 
-app.use(userRoutes)
+app.use("/users/",userRoutes)
+
 app.get("/", (req, res) => {
-  res.status(201).send("<h1>hi</h1>");
+  res.send("<h1>hi</h1>");
 });
 
 app.get("/about", (req, res) => {
