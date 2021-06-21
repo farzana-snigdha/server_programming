@@ -41,7 +41,8 @@ const postRegister = async (req, res) => {
     }
   } catch (error) {
     console.error(error.message);
-    res.status(500).send(error.message);
+    alert("Please enter all required fields.");
+    res.redirect("/register");
   }
 };
 
