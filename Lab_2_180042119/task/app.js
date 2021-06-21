@@ -9,7 +9,9 @@ app.use(express.static("public"));
 app.use(userRoutes);
 
 app.get('/',(req, res) => {
-    res.sendFile("index3.html", { root: "./views" });
+    // res.clearCookie("fullname")
+    
+        res.sendFile("index3.html", { root: "./views" });
   })
 
 app.use((req, res) => {

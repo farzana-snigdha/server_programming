@@ -1,0 +1,75 @@
+const User = require("../model/userModel");
+const bcrypt = require("bcryptjs");
+var LocalStorage = require("node-localstorage").LocalStorage;
+localStorage = new LocalStorage("./scratch");
+const alert = require("alert");
+const saltRounds = 10;
+
+const getRegister = (req, res) => {
+  res.sendFile("register.html", { root: "./views/pages/examples" });
+};
+
+const postRegister = async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.pass;
+  const re_pass = req.body.re_pass;
+
+  try {
+    if (String(password).length < 6) {
+      alert("Please enter a password of at least 6 characters.");
+      res.redirect("/register");
+    } else if (!(password == re_pass)) {
+      alert("Please enter the same password twice.");
+      res.redirect("/register");
+    } else {
+      const salt = await bcrypt.genSaltSync(10);
+      passwordHash = await bcrypt.hash(password, salt);
+      //   console.log(passwordHash);
+      user = new User({
+        name,
+        email,
+        passwordHash,
+      });
+      const savedUser = await user.save();
+      localStorage.setItem("fullname", name)
+      res.cookie("fullname", name);
+      res.redirect("/dashboard");
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send(error.message);
+  }
+};
+
+const getLogin = (req, res) => {
+  res.sendFile("login.html", { root: "./views/pages/examples" });
+};
+
+const postLogin = async (req, res) => {
+  const email = req.body.email;
+  const pass = req.body.pass;
+  const existingUser = await User.findOne({ email });
+ try{ if (existingUser) {
+    const passMatch = bcrypt.compare(pass, existingUser.passwordHash);
+    if (passMatch) {
+      localStorage.setItem("name", existingUser.name)
+      // res.cookie("fullname", existingUser.name);
+      res.redirect("/dashboard");
+    } else {
+      alert("Wrong Password");
+    }
+  } else {
+    alert("You are not registered\nPlease create an account");
+    res.redirect("/login");
+  }}catch (error){
+    console.error(error.message);
+    res.status(500).send(error.message);
+  }
+};
+
+const getDashboard = (req, res) => {
+  res.sendFile("index3.html", { root: "./views" });
+};
+
+module.exports = { getLogin, getRegister, postRegister, postLogin,getDashboard };
