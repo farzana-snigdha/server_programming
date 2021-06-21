@@ -3,7 +3,7 @@ const userRoutes = require("./routes/userRoutes.routes");
 const app = express();
 const { logger, printSomething } = require("./middlewares/app.middleware");
 const morgan = require("morgan");
-//to call a middleware always from any rotes
+//to call a middleware always from any routes
 app.use([logger, printSomething]);
 
 //built in middleware

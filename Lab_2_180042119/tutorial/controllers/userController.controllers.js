@@ -14,7 +14,7 @@ const postRegister = (req, res) => {
 };
 
 const getLogin = (req, res) => {
-  const { id, name } = req.query;
+  const { id, name } = req.params;
   res.send(id + "  " + name + " says hi");
 };
 
