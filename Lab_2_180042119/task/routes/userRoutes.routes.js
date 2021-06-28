@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
+const cookie = require("cookie-parser");
+
+router.use(cookie())
 const {
   getRegister,
   getLogin,
@@ -18,5 +21,5 @@ router.post("/login", postLogin);
 router.get("/register", getRegister);
 router.post("/register", postRegister);
 
-router.get("/dashboard", isLoggedin, getDashboard);
+router.get(`/dashboard`, isLoggedin, getDashboard);
 module.exports = router;

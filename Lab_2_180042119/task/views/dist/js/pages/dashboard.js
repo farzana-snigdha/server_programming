@@ -6,7 +6,13 @@
  **/
 
 /* global moment:false, Chart:false, Sparkline:false */
-
+const dashboardText = document.getElementById('username')
+if(localStorage.getItem("name")){
+  dashboardText.textContent =localStorage.getItem("name")
+  dashboardText.style.color = "white"
+  console.log("dwdwdwddddddddddddd")
+}
+console.log(localStorage.getItem("name"))
 $(function () {
   'use strict'
 

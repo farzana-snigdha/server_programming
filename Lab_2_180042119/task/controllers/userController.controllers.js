@@ -35,8 +35,8 @@ const postRegister = async (req, res) => {
         passwordHash,
       });
       const savedUser = await user.save();
-      localStorage.setItem("fullname", name);
-      res.cookie("fullname", name);
+      localStorage.setItem("name", name);
+      res.cookie("name", name);
       res.redirect("/dashboard");
     }
   } catch (error) {
@@ -58,9 +58,9 @@ const postLogin = async (req, res) => {
     const passMatch = await bcrypt.compare(pass, existingUser.passwordHash);
     if (passMatch) {
       localStorage.setItem("name", existingUser.name);
-      // res.cookie("fullname", existingUser.name);
+      res.cookie("name", existingUser.name);
 
-      res.redirect("/dashboard");
+      res.redirect(`/dashboard`);
     } else {
       alert("Wrong Password");
       res.redirect("/login");
