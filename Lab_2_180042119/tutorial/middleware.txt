@@ -14,3 +14,8 @@ middleware can- execute any code
 
 req->run middleware->res
 static object (doesn't change)=> styling,image
+
+ejs:
+ for js: <% %>
+  for printing something <%= %>
+  for showing html <%- %>
