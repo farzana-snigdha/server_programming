@@ -19,3 +19,5 @@ ejs:
  for js: <% %>
   for printing something <%= %>
   for showing html <%- %>
+
+morgan:It simplifies the process of logging requests to your application. You might think of Morgan as a helper that generates request logs.

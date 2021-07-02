@@ -1,5 +1,6 @@
 /* global Chart:false */
 // returns an object with the cookies' name as keys
+console.log("sss")
 const getAppCookies = (req) => {
   // We extract the raw cookies from the request headers
   const rawCookies = req.headers.cookie.split('; ');

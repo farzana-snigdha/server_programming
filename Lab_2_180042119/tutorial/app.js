@@ -2,6 +2,8 @@ const express = require("express");
 const userRoutes = require("./routes/userRoutes.routes");
 const app = express();
 const { logger, printSomething } = require("./middlewares/app.middleware");
+
+//It simplifies the process of logging requests to your application. You might think of Morgan as a helper that generates request logs.
 const morgan = require("morgan");
 //to call a middleware always from any routes
 app.use([logger, printSomething]);
