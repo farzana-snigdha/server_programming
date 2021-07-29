@@ -28,7 +28,7 @@ const postRegister = async (req, res) => {
     } else {
       const salt = await bcrypt.genSaltSync(10);
       passwordHash = await bcrypt.hash(password, salt);
-      //   console.log(passwordHash);
+      // console.log(passwordHash);
       user = new User({
         name,
         email,
