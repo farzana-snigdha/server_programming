@@ -6,5 +6,10 @@ const ensureAuthenticated = (req, res, next) => {
     res.redirect("/users/login");
   }
 };
-
-module.exports = ensureAuthenticated;
+//if a user want to go to a restricted page, then his login data will be passed  
+const addUserData = (req, res,next) => {
+  res.locals.req = req;
+  res.locals.res = res;
+  next();
+};
+module.exports = {ensureAuthenticated,addUserData};
