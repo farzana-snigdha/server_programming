@@ -1,11 +1,13 @@
 const MathOlympiad=require('../models/MathOlympiad.models')
-
-
+ 
 const getMO= (req,res)=>{
     res.render('math-olympiad/register.ejs')
 }
 
 const postMO= (req,res)=>{
+    const{name,category,contact,email,institution,tshirt}=req.body
+    console.log(institution)
+  
     res.render('math-olympiad/register.ejs')
 }
 
