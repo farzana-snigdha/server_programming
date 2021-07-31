@@ -120,4 +120,36 @@ const paymentDoneMO = (req, res) => {
     });
 };
 
-module.exports = { getMO, postMO, getMOList, deleteMO, paymentDoneMO };
+const editMO = (req, res) => {
+  const id = req.params.name;
+const tshirt=req.params.tshirt
+console.log('wd ',id,'  ',tshirt)
+ 
+};
+const selectMO = (req, res) => {
+  const id = req.params.id;
+
+  MathOlympiad.findOne({ _id: id })
+    .then((participant) => {
+      participant.selected = true;
+      participant
+        .save()
+        .then(() => {
+          let error = "Participant has been selected succesfully";
+          req.flash("error", error);
+          res.redirect("/MathOlympiad/list");
+        })
+        .catch(() => {
+          let error = "Data could not be updated";
+          req.flash("error", error);
+          res.redirect("/MathOlympiad/list");
+        });
+    })
+    .catch(() => {
+      let error = "Data could not be updated";
+      req.flash("error", error);
+      res.redirect("/MathOlympiad/list");
+    });
+};
+
+module.exports = { getMO, postMO, getMOList, deleteMO, paymentDoneMO,selectMO,editMO };
