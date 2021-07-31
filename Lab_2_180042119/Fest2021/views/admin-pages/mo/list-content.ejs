@@ -13,17 +13,19 @@
       </div>
       <div class="x_content">
         <br />
-        <% let success= 'Data has been deleted successfully!'%> <% if
-        (error.length>0) {if (error==success){%>
+        <% let success= 'Data has been deleted successfully!'%> 
+        <% let success2= 'Payment completed succesfully'%>
+        <% if
+        (error.length>0) {if (error==success||success2){%>
         <div class="alert alert-success"><%=error%></div>
         <%}else{%>
         <div class="alert alert-danger"><%=error%></div>
         <%}%> <%}%>
 
-        <div class="row">
+        <div class="row" > 
           <div class="col-sm-12">
             <div class="card-box table-responsive">
-              <table
+              <table            
                 id="datatable-responsive"
                 class="table table-striped table-bordered dt-responsive nowrap"
                 cellspacing="0"
@@ -79,7 +81,8 @@
                       <%}%>
                     </td>
                     <td>Select</td>
-                    <td>Payment Done</td>
+                    <td><% const paymentDoneURL= 'paymentDone/'+ participant._id %>
+                      <a href="<%= paymentDoneURL %>"><i class="fa fa-money"></i><span class="fa fa-chevron"></span></a></td>
                     <td>Edit</td>
                     <td>
                       <% const deleteURL= 'delete/'+ participant._id %>
