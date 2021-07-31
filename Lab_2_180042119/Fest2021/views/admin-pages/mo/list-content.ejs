@@ -62,15 +62,16 @@
                 <tbody>
                   <%if(participants.length>0){
                   participants.forEach(participant=>{%>
-                  <tr>
+                  <tr contenteditable="true">
                     <!-- <td><%=participant._id%></td> -->
                     <%let participantInfo=[]%>
-                    <td contenteditable="true" ><%=participant.name%></td>
+                    <td  >
+                      <%=participant.name%></td>
                     <td><%=participant.category%></td>
-                    <td contenteditable="true"><%=participant.contact%></td>
+                    <td><%=participant.contact%></td>
                     <td><%=participant.email%></td>
                     <td><%=participant.institution%></td>
-                    <td contenteditable="true"><%=participant.tshirt%></td>
+                    <td><%=participant.tshirt%></td>
                     <td><%=participant.total%></td>
                     <td><%=participant.paid%></td>
                     <td>
@@ -103,7 +104,7 @@
                       ></a>
                     </td>
                     <td>
-                      <% const editURL= 'edit/'+ participant._id+'/'+participant.name+'/'+participant.contact+'/'+participant.tshirt %>
+                      <% const editURL= 'edit-participant/'+participant._id %>
                       <a href="<%= editURL%>" 
                         ><i class="fa fa-pencil"></i
                         ><span class="fa fa-chevron"></span
