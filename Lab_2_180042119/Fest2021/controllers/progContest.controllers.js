@@ -85,14 +85,14 @@ const getPCList = (req, res) => {
   ProgContest.find()
     .then((data) => {
       all_participant = data;
-      res.render("math-olympiad/list.ejs", {
+      res.render("prog-contest/teamList.ejs", {
         error: req.flash("error"),
         participants: all_participant,
       });
     })
     .catch(() => {
       error = "Failed to fetch participants";
-      res.render("math-olympiad/list.ejs", {
+      res.render("prog-contest/teamList.ejs", {
         error: req.flash("error", error),
         participants: all_participant,
       });
