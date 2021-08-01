@@ -1,10 +1,10 @@
-const MathOlympiad = require("../models/MathOlympiad.models");
+// const MathOlympiad = require("../models/MathOlympiad.models");
 
-const getMO = (req, res) => {
-  res.render("math-olympiad/register.ejs", { error: req.flash("error") });
+const getPC = (req, res) => {
+  res.render("prog-contest/registerTeam.ejs", { error: req.flash("error") });
 };
 
-const postMO = (req, res) => {
+const postPC = (req, res) => {
   const { name, category, contact, email, institution, tshirt } = req.body;
   console.log(institution);
   let registrationFee = 0;
@@ -55,7 +55,7 @@ const postMO = (req, res) => {
   //   res.render('math-olympiad/register.ejs')
 };
 
-const getMOList = (req, res) => {
+const getPCList = (req, res) => {
   let all_participant = [];
   let error = "";
   MathOlympiad.find()
@@ -75,7 +75,7 @@ const getMOList = (req, res) => {
     });
   // res.render("math-olympiad/list.ejs");
 };
-const deleteMO = (req, res) => {
+const deletePC = (req, res) => {
   const id = req.params.id;
   console.log("id ", id);
 
@@ -94,7 +94,7 @@ const deleteMO = (req, res) => {
   // res.render('math-olympiad/register.ejs')
 };
 
-const paymentDoneMO = (req, res) => {
+const paymentDonePC = (req, res) => {
   const id = req.params.id;
 
   MathOlympiad.findOne({ _id: id })
@@ -120,7 +120,7 @@ const paymentDoneMO = (req, res) => {
     });
 };
 
-const getEditMO = (req, res) => {
+const getEditPC = (req, res) => {
   const id = req.params.id;
   // const tshirt=req.params.tshirt
   console.log("wd ", id, "  ");
@@ -144,7 +144,7 @@ const getEditMO = (req, res) => {
     });
 };
 
-const postEditMO = async (req, res) => {
+const postEditPC = async (req, res) => {
   const { name, contact, category, email, institution, tshirt } = req.body;
 
   const data = await MathOlympiad.findOneAndUpdate(
@@ -156,7 +156,7 @@ const postEditMO = async (req, res) => {
     res.redirect("/MathOlympiad/list");
   }
 };
-const selectMO = (req, res) => {
+const selectPC = (req, res) => {
   const id = req.params.id;
 
   MathOlympiad.findOne({ _id: id })
@@ -183,12 +183,12 @@ const selectMO = (req, res) => {
 };
 
 module.exports = {
-  getMO,
-  postMO,
-  getMOList,
-  deleteMO,
-  paymentDoneMO,
-  selectMO,
-  getEditMO,
-  postEditMO,
+  getPC,
+  postPC,
+  getPCList,
+  deletePC,
+  paymentDonePC,
+  selectPC,
+  getEditPC,
+  postEditPC,
 };
