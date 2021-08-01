@@ -3,7 +3,12 @@
     <div class="clearfix">
       <h1>Programming Contest <small>/Register A Team</small></h1>
       <br />
-
+      <% let success= 'Team for Programming Contest has been registered successfully!!'%>
+      <% if (error.length>0) {if (error==success){%>
+        <div class="alert alert-success"><%=error%></div>
+        <%}else{%>
+        <div class="alert alert-danger"><%=error%></div> 
+        <%}%> <%}%>
       <form method="POST" action="/ProgContest/register" id="demo-form2" data-parsley-validate
         class="form-horizontal form-label-left">
         <div class="item form-group">
