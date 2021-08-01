@@ -16,12 +16,11 @@
           </div>
           <div class="x_content">
             <br />
-            <% let success= 'Participant has been registered successfully!!'%>
-            <% if (error.length>0) {if (error==success){%>
-              <div class="alert alert-success"><%=error%></div>
-              <%}else{%>
+           
+            <% if (error.length>0) {%>
+              
               <div class="alert alert-danger"><%=error%></div> 
-              <%}%> <%}%>
+             <%}%> %>
             <form
               method="POST"
               action="/MathOlympiad/edit-participant"
@@ -35,9 +34,9 @@
                   for="first-name"
                   >Name <span class="required">*</span>
                 </label>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-6 col-sm-6"   >
                   <input
-                    contenteditable="false"
+                  contenteditable=false
                     type="text"
                     id="name"
                     name="name"

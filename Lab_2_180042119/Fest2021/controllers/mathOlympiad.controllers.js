@@ -144,17 +144,16 @@ const getEditMO = (req, res) => {
     });
 };
 
-const getPostMO = async (req, res) => {
-  // const id = req.params.id;
-  // const tshirt=req.params.tshirt
+const postEditMO = async (req, res) => {
+
   const {name,contact,  category,  email, institution, tshirt } = req.body;
- // console.log("wd ", id, "  ");
-  let info = [];
+
  const data=await MathOlympiad.findOneAndUpdate({ name: name, contact: contact }, { category,  email, institution, tshirt})
    if(data){
     console.log("findOneAndUpdate ", data);
     res.redirect('/MathOlympiad/list')
    }
+
    
 };
 const selectMO = (req, res) => {
@@ -191,5 +190,5 @@ module.exports = {
   paymentDoneMO,
   selectMO,
   getEditMO,
-  getPostMO,
+  postEditMO,
 };
