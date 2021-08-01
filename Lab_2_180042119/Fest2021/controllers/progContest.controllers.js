@@ -152,8 +152,8 @@ const getEditPC = (req, res) => {
   ProgContest.findOne({ _id: id })
     .then((data) => {
       info = data;
-      // console.log("info ", info);
-      res.render("math-olympiad/editParticipant.ejs", {
+     
+      res.render("prog-contest/editTeam.ejs", {
         error: req.flash("error"),
         participant: info,
       });
@@ -161,7 +161,7 @@ const getEditPC = (req, res) => {
     .catch((e) => {
       console.log(e);
       error = "Failed to fetch participants";
-      res.render("math-olympiad/editParticipant.ejs", {
+      res.render("prog-contest/editTeam.ejs", {
         error: req.flash("error", error),
         participant: info,
       });
@@ -169,14 +169,67 @@ const getEditPC = (req, res) => {
 };
 
 const postEditPC = async (req, res) => {
-  const { name, contact, category, email, institution, tshirt } = req.body;
+  const {
+    teamName,
+    institute,
+    coachName,
+    coachContact,
+    coachEmail,
+    coachTshirt,
+    TLName,
+    TLContact,
+    TLEmail,
+    TLtshirt,
+    TM1Name,
+    TM1Contact,
+    TM1Email,
+    TM1tshirt,
+    TM2Name,
+    TM2Contact,
+    TM2Email,
+    TM2tshirt,
+  } = req.body;
+  
+  console.log( teamName,
+    institute,
+    coachName,
+    coachContact,
+    coachEmail,
+    coachTshirt,
+    TLName,
+    TLContact,
+    TLEmail,
+    TLtshirt,
+    TM1Name,
+    TM1Contact,
+    TM1Email,
+    TM1tshirt,
+    TM2Name,
+    TM2Contact,
+    TM2Email,
+    TM2tshirt,)
 
   const data = await ProgContest.findOneAndUpdate(
-    { name: name, contact: contact },
-    { category, email, institution, tshirt }
+    { teamName: teamName, institute: institute },
+    {  coachName,
+      coachContact,
+      coachEmail,
+      coachTshirt,
+      TLName,
+      TLContact,
+      TLEmail,
+      TLtshirt,
+      TM1Name,
+      TM1Contact,
+      TM1Email,
+      TM1tshirt,
+      TM2Name,
+      TM2Contact,
+      TM2Email,
+      TM2tshirt, }
   );
   if (data) {
-    console.log("findOneAndUpdate ", data);
+    console.log("findOneAndUpdate prog contest ", data);
     res.redirect("/ProgContest/list");
   }
 };
