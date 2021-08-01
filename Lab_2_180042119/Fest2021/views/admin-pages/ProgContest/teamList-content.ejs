@@ -13,6 +13,14 @@
       </div>
       <div class="x_content">
         <br />
+        <% let success3= 'Participant has been selected succesfully'%> <% let
+        success= 'Data has been deleted successfully!'%> <% let success2=
+        'Payment completed succesfully'%> <% if (error.length>0) {if
+        (error==success||success2||success3){%>
+        <div class="alert alert-success"><%=error%></div>
+        <%}else{%>
+        <div class="alert alert-danger"><%=error%></div>
+        <%}%> <%}%>
         <div class="row">
           <div class="col-sm-12">
             <div class="card-box table-responsive">
