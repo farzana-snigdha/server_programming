@@ -5,7 +5,9 @@
       <div class="col-md-12 col-sm-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Math Olympiad&nbsp;<small>Edit Participant's Information</small></h2>
+            <h2>
+              Math Olympiad&nbsp;<small>Edit Participant's Information</small>
+            </h2>
             <ul class="nav navbar-right panel_toolbox">
               <li>
                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -16,11 +18,11 @@
           </div>
           <div class="x_content">
             <br />
-           
+
             <% if (error.length>0) {%>
-              
-              <div class="alert alert-danger"><%=error%></div> 
-             <%}%> %>
+
+            <div class="alert alert-danger"><%=error%></div>
+            <%}%> %>
             <form
               method="POST"
               action="/MathOlympiad/edit-participant"
@@ -34,16 +36,14 @@
                   for="first-name"
                   >Name <span class="required">*</span>
                 </label>
-                <div class="col-md-6 col-sm-6"   >
+                <div class="col-md-6 col-sm-6">
                   <input
-                  
                     type="text"
                     id="name"
                     name="name"
                     required="required"
                     class="form-control"
                     value="<%=participant.name%>"
-                    
                   />
                 </div>
               </div>
@@ -56,14 +56,12 @@
                 </label>
                 <div class="col-md-6 col-sm-6">
                   <input
-                  
                     type="text"
                     id="contact"
                     name="contact"
                     required="required"
                     class="form-control"
                     value="<%=participant.contact%>"
-                    
                   />
                 </div>
               </div>
@@ -111,7 +109,7 @@
                 </label>
                 <div class="col-md-6 col-sm-6">
                   <select class="form-control" id="category" name="category">
-                    <option >---Choose option---</option>
+                    <option value="<%=participant.category%>"><%=participant.category%></option>
                     <option value="School">School</option>
                     <option value="College">College</option>
                     <option value="University">University</option>
@@ -127,7 +125,7 @@
                 </label>
                 <div class="col-md-6 col-sm-6">
                   <select class="form-control" id="tshirt" name="tshirt">
-                    <option >---Choose option---</option>
+                    <option value="<%=participant.tshirt%>"><%=participant.tshirt%></option>
                     <option value="M">Medium</option>
                     <option value="L">Large</option>
                     <option value="XL">Extra Large</option>
