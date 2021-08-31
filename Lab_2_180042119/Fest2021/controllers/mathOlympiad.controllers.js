@@ -1,5 +1,5 @@
 const MathOlympiad = require("../models/MathOlympiad.models");
-
+const sendMail=require('./sendMail.Controllers')
 const getMO = (req, res) => {
   res.render("math-olympiad/register.ejs", { error: req.flash("error") });
 };
@@ -43,6 +43,7 @@ const postMO = (req, res) => {
         .then(() => {
           error = "Participant has been registered successfully!!";
           req.flash("error", error);
+          sendMail(email,'Math Olympiad',name)
           res.redirect("/MathOlympiad/register");
         })
         .catch(() => {

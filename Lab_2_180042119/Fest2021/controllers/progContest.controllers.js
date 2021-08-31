@@ -1,4 +1,5 @@
 const ProgContest = require("../models/ProgContest.model");
+const sendMail=require('./sendMail.Controllers')
 const getPC = (req, res) => {
   res.render("prog-contest/registerTeam.ejs", { error: req.flash("error") });
 };
@@ -65,6 +66,7 @@ const postPC = (req, res) => {
             error = "Team for Programming Contest has been registered successfully!!";
             console.log("save ", error);
             req.flash("error", error);
+            sendMail(TLEmail,'Programming Contest', `Team ${teamName}`)
             res.redirect("/ProgContest/register");
           })
           .catch(() => {
