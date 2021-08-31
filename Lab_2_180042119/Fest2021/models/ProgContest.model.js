@@ -93,6 +93,10 @@ const progContestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  confirmationMail:{
+    type:String,
+    unique:true,
+    },
 });
 
 const ProgContest = mongoose.model("programming-contest", progContestSchema);

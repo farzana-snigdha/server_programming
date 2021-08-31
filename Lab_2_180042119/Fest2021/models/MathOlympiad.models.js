@@ -41,7 +41,10 @@ const mathOlympiadSchema = new mongoose.Schema({
       type:Date,
       default:Date.now
   },
-
+confirmationMail:{
+type:String,
+unique:true,
+},
 });
 
 const MathOlympiad = mongoose.model("math-olympiad", mathOlympiadSchema);
