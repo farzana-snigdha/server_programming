@@ -1,5 +1,7 @@
 const ProgContest = require("../models/ProgContest.model");
 const sendMail=require('./sendMail.Controllers')
+const randNumber=require('../utility/randomNumberGenerator')
+
 const getPC = (req, res) => {
   res.render("prog-contest/registerTeam.ejs", { error: req.flash("error") });
 };
@@ -58,7 +60,8 @@ const postPC = (req, res) => {
           TM2Contact,
           TM2Email,
           TM2tshirt,
-          total,paid,selected
+          total,paid,selected,
+          confirmationMail:randNumber()
         });
         participant
           .save()
