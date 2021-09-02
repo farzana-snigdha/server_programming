@@ -34,6 +34,7 @@
                   <tr>
                     <!-- <th>ID</th> -->
                     <th>Team Name</th>
+                    <th>ID</th>
                     <th>Institute</th>
                     <th>Coach <br />Information</th>
                     <th>Team Leader <br />Information</th>
@@ -54,6 +55,7 @@
                   participants.forEach(participant=>{%>
                   <tr>
                     <td><%=participant.teamName%></td>
+                    <td><%=participant.confirmationMail%></td>
                     <td><%=participant.institute%></td>
                     <td>
                       <h7 style="color: rgb(76, 76, 240)">Name:&nbsp;</h7> <%=participant.coachName%><br />
