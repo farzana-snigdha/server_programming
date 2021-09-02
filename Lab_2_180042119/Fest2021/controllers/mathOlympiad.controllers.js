@@ -2,6 +2,7 @@ const MathOlympiad = require("../models/MathOlympiad.models");
 const sendMail=require('./sendMail.Controllers')
 const randNumber=require('../utility/randomNumberGenerator')
 
+
 const getMO = (req, res) => {
   
   res.render("math-olympiad/register.ejs", { error: req.flash("error") });
@@ -22,7 +23,8 @@ const postMO = (req, res) => {
   const paid = 0;
   const selected = false;
   let error = "";
-
+  let random_number=randNumber()
+  
   MathOlympiad.findOne({ name: name, contact: contact }).then((participant) => {
     if (participant) {
       error = "Participant with same name and contact exists";
@@ -40,17 +42,18 @@ const postMO = (req, res) => {
         total,
         selected,
         tshirt,
-        confirmationMail:randNumber()
+        confirmationMail:random_number
       });
       participant
         .save()
         .then(() => {
           error = "Participant has been registered successfully!!";
           req.flash("error", error);
-          sendMail(email,'Math Olympiad',name)
+          sendMail(email,'Math Olympiad',name,random_number)
           res.redirect("/MathOlympiad/register");
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log('error ',err)
           error = "Unexpected error";
           req.flash("error", error);
           res.redirect("/MathOlympiad/register");

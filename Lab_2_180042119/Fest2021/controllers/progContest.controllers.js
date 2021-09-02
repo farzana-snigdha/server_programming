@@ -28,7 +28,8 @@ const postPC = (req, res) => {
     TM2tshirt,
   } = req.body;
   console.log(institute);
-
+  
+  let random_number=randNumber()
   const total = 800;
   const paid = 0;
   const selected = false;
@@ -61,7 +62,7 @@ const postPC = (req, res) => {
           TM2Email,
           TM2tshirt,
           total,paid,selected,
-          confirmationMail:randNumber()
+          confirmationMail:random_number
         });
         participant
           .save()
@@ -69,7 +70,9 @@ const postPC = (req, res) => {
             error = "Team for Programming Contest has been registered successfully!!";
             console.log("save ", error);
             req.flash("error", error);
-            sendMail(TLEmail,'Programming Contest', `Team ${teamName}`)
+            sendMail(TLEmail,'Programming Contest', `${TLName} from Team ${teamName}`,random_number)
+            sendMail(TM1Email,'Programming Contest', `${TM1Name} from Team ${teamName}`,random_number)
+            sendMail(TM2Email,'Programming Contest', `${TM2Name} from Team ${teamName}`,random_number)
             res.redirect("/ProgContest/register");
           })
           .catch(() => {
