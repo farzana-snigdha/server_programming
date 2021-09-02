@@ -1,10 +1,8 @@
 const MathOlympiad = require("../models/MathOlympiad.models");
-const sendMail=require('./sendMail.Controllers')
-const randNumber=require('../utility/randomNumberGenerator')
-
+const sendMail = require("./sendMail.Controllers");
+const randNumber = require("../utility/randomNumberGenerator");
 
 const getMO = (req, res) => {
-  
   res.render("math-olympiad/register.ejs", { error: req.flash("error") });
 };
 
@@ -23,8 +21,7 @@ const postMO = (req, res) => {
   const paid = 0;
   const selected = false;
   let error = "";
-  let random_number=randNumber()
-  
+
   MathOlympiad.findOne({ name: name, contact: contact }).then((participant) => {
     if (participant) {
       error = "Participant with same name and contact exists";
@@ -42,24 +39,40 @@ const postMO = (req, res) => {
         total,
         selected,
         tshirt,
-        confirmationMail:random_number
       });
+      // participant.save()
       participant
         .save()
-        .then(() => {
-          error = "Participant has been registered successfully!!";
-          req.flash("error", error);
-          sendMail(email,'Math Olympiad',name,random_number)
-          res.redirect("/MathOlympiad/register");
+        .then((ans) => {
+          let uniqueID = ans._id;
+         // console.log("wdw ", uniqueID);
+          MathOlympiad.findOneAndUpdate(
+            { _id: uniqueID },
+            { $set: { confirmationMail: randNumber(uniqueID) } }
+          )
+            .then(()=>{
+              error = "Participant has been registered successfully!!";
+              req.flash("error", error);
+              sendMail(email, "Math Olympiad", name, uniqueID);
+              res.redirect("/MathOlympiad/register");
+            })
+            .catch((err) => {
+              console.log("mo ", err);
+            });
+
+        
         })
         .catch((err) => {
-          console.log('error ',err)
+          console.log("error ", err);
           error = "Unexpected error";
           req.flash("error", error);
           res.redirect("/MathOlympiad/register");
         });
     }
   });
+
+  // MathOlympiad.findOneAndUpdate({name:name,contact:contact,email:email }).then((ans)=>{ if(ans){console.log("mo ans",ans)}}).catch((err)=>{console.log("mo ",err)})
+
   //   res.render('math-olympiad/register.ejs')
 };
 
@@ -153,21 +166,19 @@ const getEditMO = (req, res) => {
 };
 
 const postEditMO = async (req, res) => {
-  let registrationFee=0
+  let registrationFee = 0;
   const { name, contact, category, email, institution, tshirt } = req.body;
-if(category=='School'){
-  registrationFee=250
-}
-else if(category=='College'){
-  registrationFee=400
-}
-else if(category=='University'){
-  registrationFee=500
-}
-const total=registrationFee
+  if (category == "School") {
+    registrationFee = 250;
+  } else if (category == "College") {
+    registrationFee = 400;
+  } else if (category == "University") {
+    registrationFee = 500;
+  }
+  const total = registrationFee;
   const data = await MathOlympiad.findOneAndUpdate(
     { name: name, contact: contact },
-    { category, email, institution, tshirt,total }
+    { category, email, institution, tshirt, total }
   );
   if (data) {
     console.log("findOneAndUpdate ", data);

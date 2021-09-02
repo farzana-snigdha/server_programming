@@ -1,7 +1,9 @@
 var crypto = require("crypto");
 
-const generateNumber = () => {
-  let num=crypto.randomBytes(4).toString('hex')
+const generateNumber = (id) => {
+  let uniqueID=id.toString()
+ // console.log(id)
+  let num= crypto.createHash('md5').update(uniqueID).digest('hex');
   console.log("rand number",num)
   return num;
 };
