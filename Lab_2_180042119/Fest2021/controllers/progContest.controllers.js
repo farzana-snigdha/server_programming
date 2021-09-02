@@ -29,7 +29,7 @@ const postPC = (req, res) => {
   } = req.body;
   console.log(institute);
   
-  let random_number=randNumber()
+  //let random_number=randNumber()
   const total = 800;
   const paid = 0;
   const selected = false;
@@ -62,18 +62,34 @@ const postPC = (req, res) => {
           TM2Email,
           TM2tshirt,
           total,paid,selected,
-          confirmationMail:random_number
+        //  confirmationMail:random_number
         });
         participant
           .save()
-          .then(() => {
-            error = "Team for Programming Contest has been registered successfully!!";
-            console.log("save ", error);
-            req.flash("error", error);
-            sendMail(TLEmail,'Programming Contest', `${TLName} from Team ${teamName}`,random_number)
-            sendMail(TM1Email,'Programming Contest', `${TM1Name} from Team ${teamName}`,random_number)
-            sendMail(TM2Email,'Programming Contest', `${TM2Name} from Team ${teamName}`,random_number)
-            res.redirect("/ProgContest/register");
+          .then((ans) => {
+
+            let uniqueID = ans._id;
+            // console.log("wdw ", uniqueID);
+             ProgContest.findOneAndUpdate(
+               { _id: uniqueID },
+               { $set: { confirmationMail: randNumber(uniqueID) } }
+             )
+               .then(()=>{
+                error = "Team for Programming Contest has been registered successfully!!";
+                console.log("save ", error);
+                req.flash("error", error);
+                sendMail(TLEmail,'Programming Contest', `${TLName} from Team ${teamName}`,uniqueID)
+                sendMail(TM1Email,'Programming Contest', `${TM1Name} from Team ${teamName}`,uniqueID)
+                sendMail(TM2Email,'Programming Contest', `${TM2Name} from Team ${teamName}`,uniqueID)
+                res.redirect("/ProgContest/register");
+               })
+               .catch((err) => {
+                 console.log("mo ", err);
+               });
+   
+
+
+           
           })
           .catch(() => {
             error = "Unexpected error";
