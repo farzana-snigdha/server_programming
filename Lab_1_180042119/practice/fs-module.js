@@ -4,22 +4,20 @@
 
 const fs = require("fs");
 
-// fs.writeFile("./contents/demoFile.txt", "hello",(err)=>{
-//     if(err){
-//         console.log(err);
-//     }
-//     else
-//     {
-//         //sync needs 2param. async needs 3(callback fn)
-// console.log("hi")
-//     }
-// });
+fs.writeFile("./demoFile.pdf", "Server Programming", (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    //sync needs 2param. async needs 3(callback fn)
+    console.log("Successful!!");
+  }
+});
 
 // fs.writeFileSync("./contents/demoFile.txt", "hello");
 
 // fs.appendFileSync("./contents/demoFile.txt", "\n hi");
 
-// fs.rename("./contents/demoFile.txt", "./contents/RenamedFile.txt", (err) => {
+// fs.rename("./demoFile.txt", "./RenamedFile.txt", (err) => {
 //     if (err) {
 //         console.log(err);
 //     } else {
@@ -35,24 +33,32 @@ const fs = require("fs");
 //     }
 // });
 
-// console.log("Before");
-// fs.readFile("./contents/RenamedFile.txt", "utf-8", (err, data) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         fs.appendFile("./contents/RenamedFile.txt", "Is this a Synchronous Process?", (err) => {
-//         });
-//         fs.readFile("./contents/RenamedFile.txt", "utf-8", (err, data) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 console.log(data);
-//             }
-//         })
-//     }
-// });
-// console.log("After");
+console.log("Before");
 
-fs.unlink("./contents/RenamedFile.txt", (err) => {
-    if (!err) console.log("Deleted Successfully.");
+fs.readFile("./contents/RenamedFile.txt", "utf-8", (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    fs.appendFile(
+      "./contents/RenamedFile.txt",
+      "Is this a Synchronous Process?",
+      (err) => {}
+    );
+    fs.readFile("./contents/RenamedFile.txt", "utf-8", (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(data);
+      }
+    });
+  }
+});
+console.log("After");
+
+fs.unlink("./demoFile.txt", (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Deleted Successfully.");
+  }
 });
