@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Notes App</title>
+</head>
+<body>
+    <h1>Notes</h1>
+    <ul>
+        <% notes.forEach((note, index) => { %>
+            <li>
+                <%= note %>
+                <form method="POST" action="/delete/<%= index %>">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+    <form method="POST" action="/add">
+        <input type="text" name="note" placeholder="Add a new note" required>
+        <button type="submit">Add Note</button>
+    </form>
+</body>
+</html>
