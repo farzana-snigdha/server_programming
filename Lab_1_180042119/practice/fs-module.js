@@ -33,6 +33,8 @@ fs.writeFile("./demoFile.pdf", "Server Programming", (err) => {
 //     }
 // });
 
+
+
 console.log("Before");
 
 fs.readFile("./contents/RenamedFile.txt", "utf-8", (err, data) => {
@@ -55,10 +57,10 @@ fs.readFile("./contents/RenamedFile.txt", "utf-8", (err, data) => {
 });
 console.log("After");
 
-fs.unlink("./demoFile.txt", (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Deleted Successfully.");
-  }
-});
+// fs.unlink("./demoFile.txt", (err) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("Deleted Successfully.");
+//   }
+// });
