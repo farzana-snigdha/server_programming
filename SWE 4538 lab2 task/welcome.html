@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>Hello, <span id="username"></span>! You have successfully logged in.</p>
+</body>
+<script>
+    // You can inject the username dynamically from your Express route
+    const username = "John"; // Replace with the actual username from your route
+    document.getElementById("username").textContent = username;
+</script>
+</html>
